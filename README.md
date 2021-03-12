@@ -30,7 +30,7 @@ O Ignite é um programa de aceleração para devs desenvolvido pela [Rocketseat]
 
 Nesse desafio foi trabalhado mais a fundo com middlewares no Express. Dessa forma foi possível fixar mais ainda os conhecimentos obtidos até agora. 
 
-Para facilitar um pouco mais do conhecimento da regra de negócio, foi trabalhadp com a mesma aplicação do desafio anterior: uma aplicação para gerenciar tarefas (ou *todos*) [ignite-desafio-conceitos-do-nodejs](https://github.com/leocairos/ignite-desafio-conceitos-do-nodejs) mas com algumas mudanças.
+Para facilitar um pouco mais do conhecimento da regra de negócio, foi trabalhadp com a mesma aplicação do desafio anterior ([ignite-desafio-conceitos-do-nodejs](https://github.com/leocairos/ignite-desafio-conceitos-do-nodejs) ): uma aplicação para gerenciar tarefas (ou *todos*) mas com algumas mudanças.
 
 Será permitida a criação de um usuário com `name` e `username`, bem como fazer o CRUD de *todos*:
 
