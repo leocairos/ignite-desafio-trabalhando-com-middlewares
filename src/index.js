@@ -11,18 +11,77 @@ const users = [];
 
 function checksExistsUserAccount(request, response, next) {
   // Complete aqui
+  const {username} = request.headers;
+  
+  if (username){
+    const userRequest = users.find(user => user.username === username);
+    if (userRequest){
+      request.user = userRequest;
+      return next();
+    } else {
+      return response.status(404).json({error: 'Username not found'});
+    }
+  } else {
+    return response.status(404).json({error: 'Username is required'});
+  }
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
-  // Complete aqui
+  // Complete aqui 
+  if (request.user.todos.length <= 10 || request.user.pro){
+      return next();    
+  } else {
+    return response.status(403);
+  }
 }
 
 function checksTodoExists(request, response, next) {
   // Complete aqui
+  const { username } = request.headers;
+  const { id } = request.params;
+  if ( !validate(id) ) {    
+      return response.status(400).json({error: 'ID is invalid UUID'});
+  }
+  if (username){
+    const userFound = users.find(user => user.username === username);
+    if (userFound){
+      const todoUser = userFound.todos.find(todo => todo.id === id);
+      if (todoUser) {
+        request.todo = todoUser;
+        request.user = userFound;
+        return next();          
+      } else {
+        return response.status(404).json({error: 'todo ID is not found to user'});
+      }      
+    } else {
+      return response.status(404).json({error: 'Username not found'});
+    }
+  } else {
+    return response.status(404).json({error: 'Username is required'});
+  }
 }
 
 function findUserById(request, response, next) {
-  // Complete aqui
+  // Complete aqui  
+  try{
+    console.log('\n\n\nAAAAAAAArequest.parms',request.parms, '\n\n\n')
+    const { id } = request.parms;
+    console.log('\n\n\nBBBBBBBB id', id, '\n\n\n')
+    if (id){
+      const userRequest = users.find(user => user.id === id);
+      if (userRequest){
+        request.user = userRequest;
+        return next();
+      } else {
+        return response.status(404).json({error: 'id not found'});
+      }
+    } else {
+      return response.status(404).json({error: 'id is required'});
+    }
+  } catch (err){
+    return response.status(404).json({error: 'Erro'});
+  }
+  
 }
 
 app.post('/users', (request, response) => {
