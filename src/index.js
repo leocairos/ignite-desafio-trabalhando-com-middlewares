@@ -28,7 +28,7 @@ function checksExistsUserAccount(request, response, next) {
 
 function checksCreateTodosUserAvailability(request, response, next) {
   // Complete aqui 
-  if (request.user.todos.length <= 10 || request.user.pro){
+  if (request.user.todos.length < 10 || request.user.pro){    
       return next();    
   } else {
     return response.status(403);
@@ -64,9 +64,7 @@ function checksTodoExists(request, response, next) {
 function findUserById(request, response, next) {
   // Complete aqui  
   try{
-    console.log('\n\n\nAAAAAAAArequest.parms',request.parms, '\n\n\n')
-    const { id } = request.parms;
-    console.log('\n\n\nBBBBBBBB id', id, '\n\n\n')
+    const { id } = request.params;    
     if (id){
       const userRequest = users.find(user => user.id === id);
       if (userRequest){
